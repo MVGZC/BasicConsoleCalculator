@@ -9,9 +9,12 @@ namespace ConsoleCalculator
         {
             return num1 + num2;
         }
-        public static decimal Rest(decimal num1, decimal num2)
+        public static decimal Rest(decimal num1, decimal num2, bool self = false)
         {
-            return num1 - num2;
+            if (!self)
+                return num1 + num2;
+            else
+                return num1 - num2;
         }
         public static decimal Multiply(decimal num1, decimal num2)
         {
@@ -123,8 +126,8 @@ namespace ConsoleCalculator
                             else { result += Operators.Sum(x, y); break; }
 
                         case "-":
-                            if (self) { result = Operators.Rest(x, y); break; }
-                            else { result += Operators.Rest(x, y); break; }
+                            if (self) { result = Operators.Rest(x, y, self); break; }
+                            else { result -= Operators.Rest(x, y); break; }
                         case "x":
                         case "*":
                             if (self) { result = Operators.Multiply(x, y); break; }
